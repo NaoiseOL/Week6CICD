@@ -1,6 +1,7 @@
 package ie.atu.wk6;
 
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -31,5 +32,11 @@ public class ProductController {
         //ProductService myService = new ProductService();
         list = myService.addProduct(product);
         return list;
+    }
+
+    @PutMapping("/id")
+    public ResponseEntity<List> editProduct(@PathVariable id, @RequestBody Product product){
+        list = myService.updateProduct(product);
+        return ResponseEntity.ok(list);
     }
 }
