@@ -1,9 +1,7 @@
 package ie.atu.wk6;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +18,17 @@ public class ProductController {
     private List<Product> list = new ArrayList<>();
     //creating a class which is interested in requests and responses
 
+    @GetMapping
+    public List<Product> getAllProducts(){
+        list = myService.getProducts();
+        return list;
+    }
+
     @PostMapping
-    public List<Product> newProduct(@RequestBody Product product){
+    public List<Product> newProduct(@RequestBody @Valid Product product){
 
         //send it to do business logic
-        ProductService myService = new ProductService();
+        //ProductService myService = new ProductService();
         list = myService.addProduct(product);
         return list;
     }
